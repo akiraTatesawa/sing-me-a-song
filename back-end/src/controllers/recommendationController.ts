@@ -4,9 +4,12 @@ import { recommendationService } from "../services/recommendationsService";
 import { wrongSchemaError } from "../utils/errorUtils";
 
 async function insert(req: Request, res: Response) {
-  const validation = recommendationSchema.validate(req.body);
+  const validation = recommendationSchema.validate(req.body, {
+    abortEarly: false,
+  });
   if (validation.error) {
-    throw wrongSchemaError();
+    const { message } = validation.error;
+    throw wrongSchemaError(message);
   }
 
   await recommendationService.insert(req.body);
