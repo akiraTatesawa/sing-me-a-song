@@ -1,8 +1,7 @@
-import { Recommendation } from "@prisma/client";
-import { CreateRecommendationData } from "../../@types/RecommendationTypes";
 import { IRecommendationRepository } from "../../repositories/IRecommendationRepository";
 import { mockRecommendationRepository } from "../../repositories/mocks/MockRecommendationRepository";
 import { conflictError } from "../../utils/errorUtils";
+import { RecommendationFactory } from "../../../tests/factories/RecommendationFactory";
 import {
   ICreateRecommendationService,
   CreateRecommendationService,
@@ -20,10 +19,8 @@ describe("Create Recommendation Service", () => {
   });
 
   it("Should be able to create a recommendation", async () => {
-    const recommendation: CreateRecommendationData = {
-      name: "Create Recommendation Service Test",
-      youtubeLink: "https://www.youtube.com/watch?v=hyV1AJiFNyo",
-    };
+    const recommendation =
+      new RecommendationFactory().generateValidRecommendationRequest();
 
     await expect(
       createRecommendationService.execute(recommendation)
@@ -34,16 +31,12 @@ describe("Create Recommendation Service", () => {
   });
 
   it("Should not be able to create a recommendation with a non-unique name", async () => {
-    const recommendation: CreateRecommendationData = {
-      name: "Create Recommendation Service Test",
-      youtubeLink: "https://www.youtube.com/watch?v=hyV1AJiFNyo",
-    };
+    const recommendation =
+      new RecommendationFactory().generateValidRecommendationRequest();
 
-    const existingRecommendation: Recommendation = {
-      id: 1,
+    const existingRecommendation = {
+      ...new RecommendationFactory().generateValidRecommendationDB(),
       name: recommendation.name,
-      youtubeLink: "https://www.youtube.com/watch?v=hyV1AJiFNyo",
-      score: 0,
     };
 
     jest

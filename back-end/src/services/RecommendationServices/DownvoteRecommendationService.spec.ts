@@ -1,7 +1,7 @@
-import { Recommendation } from "@prisma/client";
 import { IRecommendationRepository } from "../../repositories/IRecommendationRepository";
 import { mockRecommendationRepository } from "../../repositories/mocks/MockRecommendationRepository";
 import { notFoundError } from "../../utils/errorUtils";
+import { RecommendationFactory } from "../../../tests/factories/RecommendationFactory";
 import {
   DownvoteRecommendationService,
   IDownvoteRecommendationService,
@@ -19,14 +19,8 @@ describe("Downvote Recommendation Service", () => {
   });
 
   it("Should be able to Downvote a recommendation without removing it", async () => {
-    const id = 1;
-
-    const existingRecommendation: Recommendation = {
-      id: 1,
-      name: "Recommendation from DB",
-      youtubeLink: "https://www.youtube.com/watch?v=hyV1AJiFNyo",
-      score: 10,
-    };
+    const existingRecommendation =
+      new RecommendationFactory().generateValidRecommendationDB();
 
     jest
       .spyOn(recommendationRepository, "find")
@@ -37,7 +31,7 @@ describe("Downvote Recommendation Service", () => {
     });
 
     await expect(
-      downvoteRecommendationService.execute(id)
+      downvoteRecommendationService.execute(existingRecommendation.id)
     ).resolves.not.toThrow();
 
     expect(recommendationRepository.find).toHaveBeenCalled();
@@ -46,12 +40,8 @@ describe("Downvote Recommendation Service", () => {
   });
 
   it("Should be able to Downvote a recommendation and remove it", async () => {
-    const id = 1;
-
-    const existingRecommendation: Recommendation = {
-      id: 1,
-      name: "Recommendation from DB",
-      youtubeLink: "https://www.youtube.com/watch?v=hyV1AJiFNyo",
+    const existingRecommendation = {
+      ...new RecommendationFactory().generateValidRecommendationDB(),
       score: -5,
     };
 
@@ -64,7 +54,7 @@ describe("Downvote Recommendation Service", () => {
     });
 
     await expect(
-      downvoteRecommendationService.execute(id)
+      downvoteRecommendationService.execute(existingRecommendation.id)
     ).resolves.not.toThrow();
 
     expect(recommendationRepository.find).toHaveBeenCalled();
