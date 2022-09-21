@@ -14,6 +14,7 @@ interface IRecommendationGeneratorFactory {
 
 interface IRecommendationCreatorFactory {
   createRecommendation(): Promise<Recommendation>;
+  createMultipleRecommendations(): Promise<number>;
 }
 
 interface IRecommendationFactory
@@ -68,5 +69,19 @@ export class RecommendationFactory implements IRecommendationFactory {
     return prisma.recommendation.create({
       data: recommendationRequest,
     });
+  }
+
+  async createMultipleRecommendations(): Promise<number> {
+    const data = [
+      this.generateValidRecommendationRequest(),
+      this.generateValidRecommendationRequest(),
+      this.generateValidRecommendationRequest(),
+    ];
+
+    const { count } = await prisma.recommendation.createMany({
+      data,
+    });
+
+    return count;
   }
 }
