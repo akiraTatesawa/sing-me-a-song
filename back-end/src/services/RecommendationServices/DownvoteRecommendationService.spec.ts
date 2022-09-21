@@ -1,6 +1,7 @@
 import { Recommendation } from "@prisma/client";
 import { IRecommendationRepository } from "../../repositories/IRecommendationRepository";
 import { mockRecommendationRepository } from "../../repositories/mocks/MockRecommendationRepository";
+import { notFoundError } from "../../utils/errorUtils";
 import {
   DownvoteRecommendationService,
   IDownvoteRecommendationService,
@@ -76,10 +77,9 @@ describe("Downvote Recommendation Service", () => {
 
     jest.spyOn(recommendationRepository, "find").mockResolvedValueOnce(null);
 
-    await expect(downvoteRecommendationService.execute(id)).rejects.toEqual({
-      message: "Recommendation not found",
-      type: "not_found",
-    });
+    await expect(downvoteRecommendationService.execute(id)).rejects.toEqual(
+      notFoundError("Recommendation not found")
+    );
 
     expect(recommendationRepository.find).toHaveBeenCalled();
     expect(recommendationRepository.updateScore).not.toHaveBeenCalled();

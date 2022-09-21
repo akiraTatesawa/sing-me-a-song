@@ -2,6 +2,7 @@ import { Recommendation } from "@prisma/client";
 import { CreateRecommendationData } from "../../@types/RecommendationTypes";
 import { IRecommendationRepository } from "../../repositories/IRecommendationRepository";
 import { mockRecommendationRepository } from "../../repositories/mocks/MockRecommendationRepository";
+import { conflictError } from "../../utils/errorUtils";
 import {
   ICreateRecommendationService,
   CreateRecommendationService,
@@ -51,10 +52,7 @@ describe("Create Recommendation Service", () => {
 
     await expect(
       createRecommendationService.execute(recommendation)
-    ).rejects.toEqual({
-      message: "Recommendations names must be unique",
-      type: "conflict",
-    });
+    ).rejects.toEqual(conflictError("Recommendations names must be unique"));
 
     expect(recommendationRepository.findByName).toHaveBeenCalled();
   });

@@ -5,6 +5,7 @@ import {
 } from "./UpvoteRecommendationService";
 import { IRecommendationRepository } from "../../repositories/IRecommendationRepository";
 import { mockRecommendationRepository } from "../../repositories/mocks/MockRecommendationRepository";
+import { notFoundError } from "../../utils/errorUtils";
 
 describe("Upvote Recommendation Service", () => {
   let recommendationRepository: IRecommendationRepository;
@@ -44,10 +45,9 @@ describe("Upvote Recommendation Service", () => {
 
     jest.spyOn(recommendationRepository, "find").mockResolvedValueOnce(null);
 
-    await expect(upvoteRecommendationService.execute(id)).rejects.toEqual({
-      message: "Recommendation not found",
-      type: "not_found",
-    });
+    await expect(upvoteRecommendationService.execute(id)).rejects.toEqual(
+      notFoundError("Recommendation not found")
+    );
 
     expect(recommendationRepository.find).toHaveBeenCalled();
     expect(recommendationRepository.updateScore).not.toHaveBeenCalled();
