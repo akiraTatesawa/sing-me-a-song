@@ -29,11 +29,12 @@ export class RecommendationFactory implements IRecommendationFactory {
     return recommendation;
   }
 
-  generateValidRecommendationArray() {
-    const recommendationArray = [
-      this.generateValidRecommendationDB(),
-      this.generateValidRecommendationDB(),
-    ];
+  generateValidRecommendationArray(length: number = 2) {
+    const recommendationArray = [];
+
+    for (let i = 0; i < length; i++) {
+      recommendationArray.push(this.generateValidRecommendationDB());
+    }
 
     return recommendationArray;
   }
