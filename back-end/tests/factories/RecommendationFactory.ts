@@ -1,18 +1,41 @@
 import { randFullName, randNumber, randVerb } from "@ngneat/falso";
 import { Recommendation } from "@prisma/client";
 import { CreateRecommendationData } from "../../src/@types/RecommendationTypes";
+import { prisma } from "../../src/database";
 
-interface IRecommendationFactory {
+interface IRecommendationGeneratorFactory {
   generateValidRecommendationRequest(): CreateRecommendationData;
+  generateInvalidRecommendationRequest(): CreateRecommendationData & {
+    invalidField: string;
+  };
   generateValidRecommendationDB(): Recommendation;
   generateValidRecommendationArray(): Recommendation[];
 }
+
+interface IRecommendationCreatorFactory {
+  createRecommendation(): Promise<Recommendation>;
+}
+
+interface IRecommendationFactory
+  extends IRecommendationGeneratorFactory,
+    IRecommendationCreatorFactory {}
 
 export class RecommendationFactory implements IRecommendationFactory {
   generateValidRecommendationRequest() {
     const recommendation: CreateRecommendationData = {
       name: randFullName(),
       youtubeLink: `https://www.youtube.com/${randVerb()}`,
+    };
+
+    return recommendation;
+  }
+
+  generateInvalidRecommendationRequest(): CreateRecommendationData & {
+    invalidField: string;
+  } {
+    const recommendation = {
+      ...this.generateValidRecommendationRequest(),
+      invalidField: "invalid",
     };
 
     return recommendation;
@@ -37,5 +60,13 @@ export class RecommendationFactory implements IRecommendationFactory {
     }
 
     return recommendationArray;
+  }
+
+  async createRecommendation(): Promise<Recommendation> {
+    const recommendationRequest = this.generateValidRecommendationRequest();
+
+    return prisma.recommendation.create({
+      data: recommendationRequest,
+    });
   }
 }

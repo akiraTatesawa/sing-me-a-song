@@ -1,5 +1,5 @@
 import joi from "joi";
-import { CreateRecommendationData } from "../services/recommendationsService";
+import { CreateRecommendationData } from "../@types/RecommendationTypes";
 
 const youtubeLinkRegex = /^(https?:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/;
 
