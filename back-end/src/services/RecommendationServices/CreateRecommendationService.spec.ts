@@ -47,7 +47,7 @@ describe("Create Recommendation Service", () => {
 
     jest
       .spyOn(recommendationRepository, "findByName")
-      .mockResolvedValue(existingRecommendation);
+      .mockResolvedValueOnce(existingRecommendation);
 
     await expect(
       createRecommendationService.execute(recommendation)
