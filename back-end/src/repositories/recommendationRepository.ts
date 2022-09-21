@@ -1,6 +1,8 @@
-import { Prisma } from "@prisma/client";
-import { prisma } from "../database.js";
-import { CreateRecommendationData } from "../services/recommendationsService.js";
+import { Prisma, Recommendation } from "@prisma/client";
+import { prisma } from "../database";
+import { CreateRecommendationData } from "../services/recommendationsService";
+
+export class RecommendationRepository {}
 
 async function create(createRecommendationData: CreateRecommendationData) {
   await prisma.recommendation.create({
@@ -13,23 +15,6 @@ interface FindAllWhere {
   scoreFilter: "lte" | "gt";
 }
 
-function findAll(findAllWhere?: FindAllWhere) {
-  const filter = getFindAllFilter(findAllWhere);
-
-  return prisma.recommendation.findMany({
-    where: filter,
-    orderBy: { id: "desc" },
-    take: 10
-  });
-}
-
-function getAmountByScore(take: number) {
-  return prisma.recommendation.findMany({
-    orderBy: { score: "desc" },
-    take,
-  });
-}
-
 function getFindAllFilter(
   findAllWhere?: FindAllWhere
 ): Prisma.RecommendationWhereInput {
@@ -40,6 +25,23 @@ function getFindAllFilter(
   return {
     score: { [scoreFilter]: score },
   };
+}
+
+function findAll(findAllWhere?: FindAllWhere) {
+  const filter = getFindAllFilter(findAllWhere);
+
+  return prisma.recommendation.findMany({
+    where: filter,
+    orderBy: { id: "desc" },
+    take: 10,
+  });
+}
+
+function getAmountByScore(take: number) {
+  return prisma.recommendation.findMany({
+    orderBy: { score: "desc" },
+    take,
+  });
 }
 
 function find(id: number) {

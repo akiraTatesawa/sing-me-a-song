@@ -1,15 +1,16 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextFunction, Request, Response } from "express";
 import {
   AppError,
   errorTypeToStatusCode,
   isAppError,
-} from "../utils/errorUtils.js";
+} from "../utils/errorUtils";
 
 export function errorHandlerMiddleware(
   err: Error | AppError,
-  req: Request,
+  _req: Request,
   res: Response,
-  next: NextFunction
+  _next: NextFunction
 ) {
   console.log(err);
 
