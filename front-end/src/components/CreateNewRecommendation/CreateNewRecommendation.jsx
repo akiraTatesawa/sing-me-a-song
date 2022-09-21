@@ -1,26 +1,47 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import { IoReturnUpForwardOutline } from "react-icons/io5";
 
-export default function CreateNewRecommendation({ onCreateNewRecommendation = () => 0, disabled = false }) {
+export default function CreateNewRecommendation({
+  onCreateNewRecommendation = () => 0,
+  disabled = false,
+}) {
   const [name, setName] = useState("");
   const [link, setLink] = useState("");
 
   const handleCreateRecommendation = () => {
     onCreateNewRecommendation({
       name,
-      link
+      link,
     });
     setLink("");
     setName("");
-  }
-  
+  };
+
   return (
     <Container>
-      <Input type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)} disabled={disabled} />
-      <Input type="text" placeholder="https://youtu.be/..." value={link} onChange={e => setLink(e.target.value)} disabled={disabled} />
-      <Button onClick={() => handleCreateRecommendation()} disabled={disabled}>
+      <Input
+        type="text"
+        placeholder="Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        disabled={disabled}
+        data-cy="name-input"
+      />
+      <Input
+        type="text"
+        placeholder="https://youtu.be/..."
+        value={link}
+        onChange={(e) => setLink(e.target.value)}
+        disabled={disabled}
+        data-cy="youtube-link-input"
+      />
+      <Button
+        onClick={() => handleCreateRecommendation()}
+        disabled={disabled}
+        data-cy="submit-recommendation"
+      >
         <IoReturnUpForwardOutline size="24px" color="#fff" />
       </Button>
     </Container>
@@ -43,7 +64,7 @@ const Input = styled.input`
   font-family: "Lexend Deca", sans-serif;
 
   &:disabled {
-    opacity: .8;
+    opacity: 0.8;
   }
 
   &::placeholder {
@@ -61,6 +82,6 @@ const Button = styled.button`
   cursor: pointer;
 
   &:disabled {
-    opacity: .8;
+    opacity: 0.8;
   }
 `;
