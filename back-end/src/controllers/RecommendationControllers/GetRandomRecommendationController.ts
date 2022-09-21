@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
 import { Controller } from "../../@types/ControllerTypes";
-import { IGetRandomRecommendationService } from "../../services/RecommendationServices/GetRandomRecommendation";
+import { IGetRandomRecommendationService } from "../../services/RecommendationServices/GetRandomRecommendationService";
 
 export class GetRandomRecommendationController extends Controller<IGetRandomRecommendationService> {
   async handle(req: Request, res: Response): Promise<void> {

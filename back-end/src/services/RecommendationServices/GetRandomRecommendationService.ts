@@ -33,7 +33,7 @@ export class GetRandomRecommendationService
     const recommendations = await this.getByScore(scoreFilter);
 
     if (recommendations.length === 0) {
-      throw notFoundError();
+      throw notFoundError("Recommendation not found");
     }
 
     const randomIndex = Math.floor(Math.random() * recommendations.length);

@@ -7,7 +7,7 @@ import { UpvoteRecommendationService } from "../../services/RecommendationServic
 import { UpvoteRecommendationController } from "./UpvoteRecommendationController";
 import { GetAllRecommendationService } from "../../services/RecommendationServices/GetAllRecommendationsService";
 import { GetAllRecommendationController } from "./GetAllRecommendationController";
-import { GetRandomRecommendationService } from "../../services/RecommendationServices/GetRandomRecommendation";
+import { GetRandomRecommendationService } from "../../services/RecommendationServices/GetRandomRecommendationService";
 import { GetRandomRecommendationController } from "./GetRandomRecommendationController";
 import { GetRecommendationByIdService } from "../../services/RecommendationServices/GetRecommendationByIdService";
 import { GetRecommendationByIdController } from "./GetRecommendationByIdController";
