@@ -1,4 +1,3 @@
-import { Recommendation } from "@prisma/client";
 import {
   IUpvoteRecommendationService,
   UpvoteRecommendationService,
@@ -6,6 +5,7 @@ import {
 import { IRecommendationRepository } from "../../repositories/IRecommendationRepository";
 import { mockRecommendationRepository } from "../../repositories/mocks/MockRecommendationRepository";
 import { notFoundError } from "../../utils/errorUtils";
+import { RecommendationFactory } from "../../../tests/factories/RecommendationFactory";
 
 describe("Upvote Recommendation Service", () => {
   let recommendationRepository: IRecommendationRepository;
@@ -19,21 +19,15 @@ describe("Upvote Recommendation Service", () => {
   });
 
   it("Should be able to Upvote a recommendation", async () => {
-    const id = 1;
-
-    const existingRecommendation: Recommendation = {
-      id,
-      name: "Recommendation from DB",
-      youtubeLink: "https://www.youtube.com/watch?v=hyV1AJiFNyo",
-      score: 10,
-    };
+    const existingRecommendation =
+      new RecommendationFactory().generateValidRecommendationDB();
 
     jest
       .spyOn(recommendationRepository, "find")
       .mockResolvedValueOnce(existingRecommendation);
 
     await expect(
-      upvoteRecommendationService.execute(id)
+      upvoteRecommendationService.execute(existingRecommendation.id)
     ).resolves.not.toThrow();
 
     expect(recommendationRepository.find).toHaveBeenCalled();
