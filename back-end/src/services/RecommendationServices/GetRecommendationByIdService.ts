@@ -17,7 +17,7 @@ export class GetRecommendationByIdService
     const recommendation = await this.repository.find(id);
 
     if (!recommendation) {
-      throw notFoundError();
+      throw notFoundError("Recommendation not found");
     }
 
     return recommendation;
