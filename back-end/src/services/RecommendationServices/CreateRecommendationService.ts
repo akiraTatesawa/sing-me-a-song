@@ -1,9 +1,12 @@
+import { Recommendation } from "@prisma/client";
 import { CreateRecommendationData } from "../../@types/RecommendationTypes";
 import { IRecommendationRepository } from "../../repositories/IRecommendationRepository";
 import { conflictError } from "../../utils/errorUtils";
 
 export interface ICreateRecommendationService {
-  execute(createRecommendationData: CreateRecommendationData): Promise<void>;
+  execute(
+    createRecommendationData: CreateRecommendationData
+  ): Promise<Recommendation>;
 }
 
 export class CreateRecommendationService
@@ -15,7 +18,7 @@ export class CreateRecommendationService
 
   async execute(
     createRecommendationData: CreateRecommendationData
-  ): Promise<void> {
+  ): Promise<Recommendation> {
     const existingRecommendation = await this.repository.findByName(
       createRecommendationData.name
     );
@@ -24,6 +27,6 @@ export class CreateRecommendationService
       throw conflictError("Recommendations names must be unique");
     }
 
-    await this.repository.create(createRecommendationData);
+    return this.repository.create(createRecommendationData);
   }
 }

@@ -26,7 +26,9 @@ describe("Create Recommendation Service", () => {
       createRecommendationService.execute(recommendation)
     ).resolves.not.toThrow();
 
-    expect(recommendationRepository.findByName).toHaveBeenCalled();
+    expect(recommendationRepository.findByName).toHaveBeenCalledWith(
+      recommendation.name
+    );
     expect(recommendationRepository.create).toHaveBeenCalled();
   });
 

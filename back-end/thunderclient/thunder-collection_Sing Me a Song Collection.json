@@ -1,0 +1,429 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Sing Me a Song Collection",
+    "dateExported": "2022-09-21T17:25:13.802Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "5b23646a-ac14-4276-8bed-f4aaef1feab3",
+            "name": "Create Recommendation",
+            "containerId": "",
+            "created": "2022-09-20T23:22:03.259Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "caad0e02-d3e1-4bc1-afd4-edb9624a10b3",
+            "name": "Get All Recommendation",
+            "containerId": "",
+            "created": "2022-09-20T23:37:11.976Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "7cef8361-2bee-4468-9487-c3cf525e1c0b",
+            "name": "Get Random Recommendation",
+            "containerId": "",
+            "created": "2022-09-20T23:44:25.387Z",
+            "sortNum": 30000
+        },
+        {
+            "_id": "59db128e-b2cd-4ec2-9da7-a2b1a6657d1c",
+            "name": "Get Recommendation By Id",
+            "containerId": "",
+            "created": "2022-09-20T23:53:30.082Z",
+            "sortNum": 40000
+        },
+        {
+            "_id": "f42f26ba-a1cc-48ae-aad8-ee9c4f2cdef6",
+            "name": "Upvote Recommendation",
+            "containerId": "",
+            "created": "2022-09-20T23:59:52.345Z",
+            "sortNum": 50000
+        },
+        {
+            "_id": "879aa8a2-7f1d-4a78-ae91-e52b5f160081",
+            "name": "Downvote Recommendation",
+            "containerId": "",
+            "created": "2022-09-21T00:02:06.003Z",
+            "sortNum": 52500
+        },
+        {
+            "_id": "bcd2dc10-e51c-472c-bed4-1b6daca77b93",
+            "name": "Get Top Recommendations",
+            "containerId": "",
+            "created": "2022-09-21T00:04:36.557Z",
+            "sortNum": 55000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "dfb11cd9-d772-4d22-ab99-7eb98eb504b5",
+            "colId": "f1983cb8-5fab-4495-bd77-dd203eee9756",
+            "containerId": "5b23646a-ac14-4276-8bed-f4aaef1feab3",
+            "name": "Create",
+            "url": "{{URL}}/recommendations",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2022-09-20T23:22:15.677Z",
+            "modified": "2022-09-21T17:24:27.592Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Test 1\",\n  \"youtubeLink\": \"https://www.youtube.com/watch?v=V9_ZpqfqHFI\"\n}",
+                "form": []
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "201"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                },
+                {
+                    "type": "set-env-var",
+                    "custom": "json.id",
+                    "action": "setto",
+                    "value": "{{recommendationId}}"
+                }
+            ]
+        },
+        {
+            "_id": "e970fba8-530d-49df-aabd-84c443bd589d",
+            "colId": "f1983cb8-5fab-4495-bd77-dd203eee9756",
+            "containerId": "caad0e02-d3e1-4bc1-afd4-edb9624a10b3",
+            "name": "List All",
+            "url": "{{URL}}/recommendations",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2022-09-20T23:37:18.314Z",
+            "modified": "2022-09-21T17:05:42.351Z",
+            "headers": [],
+            "params": [],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "_id": "f0e742e8-8b2a-4fba-aaeb-37a672acd8ce",
+            "colId": "f1983cb8-5fab-4495-bd77-dd203eee9756",
+            "containerId": "7cef8361-2bee-4468-9487-c3cf525e1c0b",
+            "name": "List Random",
+            "url": "{{URL}}/recommendations/random",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2022-09-20T23:44:39.346Z",
+            "modified": "2022-09-21T17:06:53.992Z",
+            "headers": [],
+            "params": [],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                }
+            ]
+        },
+        {
+            "_id": "32fb96bf-3e2c-477d-8f77-59af6c9481b5",
+            "colId": "f1983cb8-5fab-4495-bd77-dd203eee9756",
+            "containerId": "59db128e-b2cd-4ec2-9da7-a2b1a6657d1c",
+            "name": "List By Id",
+            "url": "{{URL}}/recommendations/{id}",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2022-09-20T23:53:38.454Z",
+            "modified": "2022-09-21T17:24:03.916Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "id",
+                    "value": "{{recommendationId}}",
+                    "isPath": true
+                }
+            ],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "_id": "e48733f5-07b5-4e95-bc5a-566bb16be137",
+            "colId": "f1983cb8-5fab-4495-bd77-dd203eee9756",
+            "containerId": "f42f26ba-a1cc-48ae-aad8-ee9c4f2cdef6",
+            "name": "Upvote",
+            "url": "{{URL}}/recommendations/{id}/upvote",
+            "method": "POST",
+            "sortNum": 70000,
+            "created": "2022-09-20T23:59:57.292Z",
+            "modified": "2022-09-21T17:23:37.146Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "id",
+                    "value": "{{recommendationId}}",
+                    "isPath": true
+                }
+            ],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                }
+            ]
+        },
+        {
+            "_id": "c5a66e70-a437-477b-8ec7-d68261455db4",
+            "colId": "f1983cb8-5fab-4495-bd77-dd203eee9756",
+            "containerId": "879aa8a2-7f1d-4a78-ae91-e52b5f160081",
+            "name": "Downvote",
+            "url": "{{URL}}/recommendations/{id}/downvote",
+            "method": "POST",
+            "sortNum": 80000,
+            "created": "2022-09-21T00:02:12.326Z",
+            "modified": "2022-09-21T17:23:40.696Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "id",
+                    "value": "{{recommendationId}}",
+                    "isPath": true
+                }
+            ],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                }
+            ]
+        },
+        {
+            "_id": "d9038dc8-39d3-493c-82d5-75dae9f4f374",
+            "colId": "f1983cb8-5fab-4495-bd77-dd203eee9756",
+            "containerId": "bcd2dc10-e51c-472c-bed4-1b6daca77b93",
+            "name": "List Top Recommendations",
+            "url": "{{URL}}/recommendations/top/{amount}",
+            "method": "GET",
+            "sortNum": 90000,
+            "created": "2022-09-21T00:05:17.302Z",
+            "modified": "2022-09-21T17:11:22.037Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "amount",
+                    "value": "3",
+                    "isPath": true
+                }
+            ],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "_id": "bcc761d2-ff69-4d02-aff9-615d94e16aaa",
+            "colId": "f1983cb8-5fab-4495-bd77-dd203eee9756",
+            "containerId": "5b23646a-ac14-4276-8bed-f4aaef1feab3",
+            "name": "409 :: Conflict",
+            "url": "{{URL}}/recommendations",
+            "method": "POST",
+            "sortNum": 100000,
+            "created": "2022-09-21T17:01:42.596Z",
+            "modified": "2022-09-21T17:04:55.064Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Test 1\",\n  \"youtubeLink\": \"https://www.youtube.com/watch?v=V9_ZpqfqHFI\"\n}",
+                "form": []
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "409"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "istype",
+                    "value": "string"
+                }
+            ]
+        },
+        {
+            "_id": "d7cf1cde-9091-47c1-a7c2-16d020da43c0",
+            "colId": "f1983cb8-5fab-4495-bd77-dd203eee9756",
+            "containerId": "5b23646a-ac14-4276-8bed-f4aaef1feab3",
+            "name": "422 :: Unprocessable Entity",
+            "url": "{{URL}}/recommendations",
+            "method": "POST",
+            "sortNum": 110000,
+            "created": "2022-09-21T17:03:53.032Z",
+            "modified": "2022-09-21T17:04:58.467Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Test 1\",\n  \"youtubeLink\": \"https://www.youtube.com/watch?v=V9_ZpqfqHFI\",\n  \"invalidField\": \"this is an invalid field\"\n}",
+                "form": []
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "422"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "istype",
+                    "value": "string"
+                }
+            ]
+        },
+        {
+            "_id": "2f0cde50-aac8-4f03-a058-95393a4795d9",
+            "colId": "f1983cb8-5fab-4495-bd77-dd203eee9756",
+            "containerId": "59db128e-b2cd-4ec2-9da7-a2b1a6657d1c",
+            "name": "404 :: Not Found",
+            "url": "{{URL}}/recommendations/{id}",
+            "method": "GET",
+            "sortNum": 120000,
+            "created": "2022-09-21T17:07:28.414Z",
+            "modified": "2022-09-21T17:08:05.408Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "id",
+                    "value": "999999999999",
+                    "isPath": true
+                }
+            ],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "404"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "istype",
+                    "value": "string"
+                }
+            ]
+        },
+        {
+            "_id": "1f84d5ed-d532-40c0-91d0-37318523a3ab",
+            "colId": "f1983cb8-5fab-4495-bd77-dd203eee9756",
+            "containerId": "f42f26ba-a1cc-48ae-aad8-ee9c4f2cdef6",
+            "name": "404 :: Not Found",
+            "url": "{{URL}}/recommendations/{id}/upvote",
+            "method": "POST",
+            "sortNum": 130000,
+            "created": "2022-09-21T17:09:28.131Z",
+            "modified": "2022-09-21T17:09:50.477Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "id",
+                    "value": "9999999999999999",
+                    "isPath": true
+                }
+            ],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "404"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "istype",
+                    "value": "string"
+                }
+            ]
+        },
+        {
+            "_id": "6d8c7d6e-965a-42fa-91ad-d780be05a4fe",
+            "colId": "f1983cb8-5fab-4495-bd77-dd203eee9756",
+            "containerId": "879aa8a2-7f1d-4a78-ae91-e52b5f160081",
+            "name": "404 :: Not Found",
+            "url": "{{URL}}/recommendations/{id}/downvote",
+            "method": "POST",
+            "sortNum": 140000,
+            "created": "2022-09-21T17:10:04.028Z",
+            "modified": "2022-09-21T17:10:53.914Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "id",
+                    "value": "9999999999",
+                    "isPath": true
+                }
+            ],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "404"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "istype",
+                    "value": "string"
+                }
+            ]
+        }
+    ],
+    "settings": {}
+}
