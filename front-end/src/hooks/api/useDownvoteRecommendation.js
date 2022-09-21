@@ -8,6 +8,6 @@ export default function useDownvoteRecommendation() {
   return {
     loadingDownvoteRecommendations: loading,
     downvoteRecommendation: act,
-    errorDownvotingRecommendation: error
+    errorDownvotingRecommendation: error,
   };
 }

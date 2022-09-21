@@ -8,6 +8,6 @@ export default function useUpvoteRecommendation() {
   return {
     loadingUpvoteRecommendations: loading,
     upvoteRecommendation: act,
-    errorUpvotingRecommendation: error
+    errorUpvotingRecommendation: error,
   };
 }

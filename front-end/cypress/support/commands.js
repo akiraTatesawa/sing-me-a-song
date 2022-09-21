@@ -8,12 +8,21 @@
 // commands please read more here:
 // https://on.cypress.io/custom-commands
 // ***********************************************
-import { randVerb } from "@ngneat/falso";
+import { randGitBranch, randVerb } from "@ngneat/falso";
 
-Cypress.Commands.add("createRecommendation", () => ({
-  name: randVerb(),
-  youtubeLink: `https://www.youtube.com/${randVerb()}`,
-}));
+Cypress.Commands.add("createRecommendation", () => {
+  const recommendation = {
+    name: randGitBranch(),
+    youtubeLink: `https://www.youtube.com/${randVerb()}`,
+  };
+
+  cy.request({
+    method: "POST",
+    url: "http://localhost:4000/recommendations",
+    body: recommendation,
+    failOnStatusCode: false,
+  }).then((res) => cy.wrap(JSON.parse(res.requestBody)));
+});
 
 //
 // -- This is a parent command --
