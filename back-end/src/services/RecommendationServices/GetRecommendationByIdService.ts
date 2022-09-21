@@ -1,8 +1,9 @@
+import { Recommendation } from "@prisma/client";
 import { IRecommendationRepository } from "../../repositories/IRecommendationRepository";
 import { notFoundError } from "../../utils/errorUtils";
 
 export interface IGetRecommendationByIdService {
-  execute(id: number): Promise<void>;
+  execute(id: number): Promise<Recommendation>;
 }
 
 export class GetRecommendationByIdService
@@ -12,8 +13,13 @@ export class GetRecommendationByIdService
     this.repository = repository;
   }
 
-  async execute(id: number): Promise<void> {
+  async execute(id: number): Promise<Recommendation> {
     const recommendation = await this.repository.find(id);
-    if (!recommendation) throw notFoundError();
+
+    if (!recommendation) {
+      throw notFoundError();
+    }
+
+    return recommendation;
   }
 }

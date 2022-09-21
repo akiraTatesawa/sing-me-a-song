@@ -9,6 +9,19 @@ export interface IGetRandomRecommendationService {
 export class GetRandomRecommendationService
   implements IGetRandomRecommendationService
 {
+  private async getByScore(scoreFilter: "gt" | "lte") {
+    const recommendations = await this.repository.findAll({
+      score: 10,
+      scoreFilter,
+    });
+
+    if (recommendations.length > 0) {
+      return recommendations;
+    }
+
+    return this.repository.findAll();
+  }
+
   constructor(private repository: IRecommendationRepository) {
     this.repository = repository;
   }
@@ -17,14 +30,7 @@ export class GetRandomRecommendationService
     const random = Math.random();
     const scoreFilter = random < 0.7 ? "gt" : "lte";
 
-    let recommendations = await this.repository.findAll({
-      score: 10,
-      scoreFilter,
-    });
-
-    if (recommendations.length < 0) {
-      recommendations = await this.repository.findAll();
-    }
+    const recommendations = await this.getByScore(scoreFilter);
 
     if (recommendations.length === 0) {
       throw notFoundError();

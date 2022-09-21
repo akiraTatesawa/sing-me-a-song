@@ -8,6 +8,7 @@ export class GetRecommendationByIdController extends Controller<IGetRecommendati
     const { id } = req.params;
 
     const recommendation = await this.service.execute(+id);
+
     res.status(200).send(recommendation);
   }
 }

@@ -12,6 +12,7 @@ import { GetRandomRecommendationController } from "./GetRandomRecommendationCont
 import { GetRecommendationByIdService } from "../../services/RecommendationServices/GetRecommendationByIdService";
 import { GetRecommendationByIdController } from "./GetRecommendationByIdController";
 import { GetTopRecommendationsService } from "../../services/RecommendationServices/GetTopRecommendationsService";
+import { GetTopRecommendationController } from "./GetTopRecommendationController";
 
 const getRecommendationRepository = () => new RecommendationRepository();
 
@@ -54,5 +55,5 @@ export function getRandomRecommendationController() {
 export function getTopRecommendationController() {
   const repository = getRecommendationRepository();
   const service = new GetTopRecommendationsService(repository);
-  return new GetRecommendationByIdController(service);
+  return new GetTopRecommendationController(service);
 }
