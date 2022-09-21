@@ -1,6 +1,6 @@
 import { Prisma, Recommendation } from "@prisma/client";
 import { prisma } from "../../database";
-import { CreateRecommendationData } from "../../services/recommendationsService";
+import { CreateRecommendationData } from "../../@types/RecommendationTypes";
 import {
   FindAllWhere,
   IRecommendationRepository,
@@ -9,8 +9,8 @@ import {
 export class RecommendationRepository implements IRecommendationRepository {
   async create(
     createRecommendationData: CreateRecommendationData
-  ): Promise<void> {
-    await prisma.recommendation.create({
+  ): Promise<Recommendation> {
+    return prisma.recommendation.create({
       data: createRecommendationData,
     });
   }

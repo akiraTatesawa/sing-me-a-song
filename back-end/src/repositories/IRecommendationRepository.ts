@@ -1,5 +1,5 @@
 import { Recommendation } from "@prisma/client";
-import { CreateRecommendationData } from "../services/recommendationsService";
+import { CreateRecommendationData } from "../@types/RecommendationTypes";
 
 export interface FindAllWhere {
   score: number;
@@ -7,7 +7,9 @@ export interface FindAllWhere {
 }
 
 export interface IRecommendationRepository {
-  create(createRecommendationData: CreateRecommendationData): Promise<void>;
+  create(
+    createRecommendationData: CreateRecommendationData
+  ): Promise<Recommendation>;
   findAll(findAllWhere?: FindAllWhere): Promise<Recommendation[]>;
   getAmountByScore(take: number): Promise<Recommendation[]>;
   find(id: number): Promise<Recommendation | null>;

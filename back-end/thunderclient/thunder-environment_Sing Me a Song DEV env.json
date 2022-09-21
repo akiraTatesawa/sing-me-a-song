@@ -1,0 +1,16 @@
+{
+    "client": "Thunder Client",
+    "environmentName": "Sing Me a Song DEV env",
+    "dateExported": "2022-09-21T17:25:41.301Z",
+    "version": "1.0",
+    "variables": [
+        {
+            "name": "URL",
+            "value": "http://localhost:4000"
+        },
+        {
+            "name": "recommendationId",
+            "value": ""
+        }
+    ]
+}

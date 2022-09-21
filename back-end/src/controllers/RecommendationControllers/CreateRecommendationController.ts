@@ -14,8 +14,8 @@ export class CreateRecommendationController extends Controller<ICreateRecommenda
       throw wrongSchemaError(message);
     }
 
-    await this.service.execute(req.body);
+    const recommendation = await this.service.execute(req.body);
 
-    res.sendStatus(201);
+    res.status(201).send(recommendation);
   }
 }
