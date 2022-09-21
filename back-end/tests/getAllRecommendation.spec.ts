@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import request from "supertest";
 import { prisma } from "../src/database";
-import { app } from '../src/app';
+import { app } from "../src/app";
 
 describe("GET /recommendations", () => {
   beforeEach(async () => {
