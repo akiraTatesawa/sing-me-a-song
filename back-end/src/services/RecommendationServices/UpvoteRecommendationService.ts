@@ -15,7 +15,7 @@ export class UpvoteRecommendationService
   async execute(id: number): Promise<void> {
     const recommendation = await this.repository.find(id);
 
-    if (!recommendation) throw notFoundError();
+    if (!recommendation) throw notFoundError("Recommendation not found");
 
     await this.repository.updateScore(id, "increment");
   }
