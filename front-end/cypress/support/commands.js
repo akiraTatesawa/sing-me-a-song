@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
@@ -7,7 +8,13 @@
 // commands please read more here:
 // https://on.cypress.io/custom-commands
 // ***********************************************
-//
+import { randVerb } from "@ngneat/falso";
+
+Cypress.Commands.add("createRecommendation", () => ({
+  name: randVerb(),
+  youtubeLink: `https://www.youtube.com/${randVerb()}`,
+}));
+
 //
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
