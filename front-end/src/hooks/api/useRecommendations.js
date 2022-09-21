@@ -7,6 +7,6 @@ export default function useRecommendations() {
   return {
     recommendations: data,
     loadingRecommendations: loading,
-    listRecommendations: act
+    listRecommendations: act,
   };
 }

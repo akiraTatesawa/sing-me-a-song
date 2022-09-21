@@ -7,6 +7,6 @@ export default function useRecommendations() {
   return {
     loadingCreatingRecommendation: loading,
     createRecommendation: act,
-    creatingRecommendationError: error
+    creatingRecommendationError: error,
   };
 }

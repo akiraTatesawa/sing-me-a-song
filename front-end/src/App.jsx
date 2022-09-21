@@ -1,4 +1,4 @@
-import { Suspense, lazy, Component } from "react";
+import React, { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function Loading() {
