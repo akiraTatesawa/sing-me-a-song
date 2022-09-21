@@ -1,4 +1,4 @@
-import { Recommendation, Prisma } from "@prisma/client";
+import { Recommendation } from "@prisma/client";
 import { CreateRecommendationData } from "../services/recommendationsService";
 
 export interface FindAllWhere {
@@ -8,9 +8,6 @@ export interface FindAllWhere {
 
 export interface IRecommendationRepository {
   create(createRecommendationData: CreateRecommendationData): Promise<void>;
-  getFindAllFilter(
-    findAllWhere?: FindAllWhere
-  ): Prisma.RecommendationWhereInput;
   findAll(findAllWhere?: FindAllWhere): Promise<Recommendation[]>;
   getAmountByScore(take: number): Promise<Recommendation[]>;
   find(id: number): Promise<Recommendation | null>;

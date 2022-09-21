@@ -15,7 +15,7 @@ export class DownvoteRecommendationService
   async execute(id: number): Promise<void> {
     const recommendation = await this.repository.find(id);
 
-    if (!recommendation) throw notFoundError();
+    if (!recommendation) throw notFoundError("Recommendation not found");
 
     const updatedRecommendation = await this.repository.updateScore(
       id,
