@@ -19,6 +19,7 @@ export class CreateRecommendationService
     const existingRecommendation = await this.repository.findByName(
       createRecommendationData.name
     );
+
     if (existingRecommendation) {
       throw conflictError("Recommendations names must be unique");
     }

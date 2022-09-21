@@ -15,7 +15,7 @@ export class RecommendationRepository implements IRecommendationRepository {
     });
   }
 
-  getFindAllFilter(
+  private getFindAllFilter(
     findAllWhere?: FindAllWhere
   ): Prisma.RecommendationWhereInput {
     if (!findAllWhere) return {};
