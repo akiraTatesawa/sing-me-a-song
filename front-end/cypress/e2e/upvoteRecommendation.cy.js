@@ -1,6 +1,10 @@
 /* eslint-disable no-undef */
 
 describe("Upvote Recommendation", () => {
+  beforeEach(() => {
+    cy.resetDatabase();
+  });
+
   it("Should be able to upvote a recommendation on homepage", () => {
     cy.visit("http://localhost:3000");
 
@@ -16,6 +20,40 @@ describe("Upvote Recommendation", () => {
       });
     });
   });
-  // it.todo("Should be able to upvote a recommendation on top page");
-  //   it.todo("Should be able to upvote a recommendation on random page");
+
+  it("Should be able to upvote a recommendation on top page", () => {
+    cy.visit("http://localhost:3000/top");
+
+    cy.createRecommendation().then((recommendation) => {
+      cy.intercept("GET", "/recommendations/top/10").as(
+        "refreshRecommendations"
+      );
+
+      cy.wait("@refreshRecommendations");
+
+      cy.contains(recommendation.name).get("[data-cy='upvote']").click();
+
+      cy.get("[data-cy='score']").should(($span) => {
+        expect($span).to.contain("1");
+      });
+    });
+  });
+
+  it("Should be able to upvote a recommendation on random page", () => {
+    cy.visit("http://localhost:3000/random");
+
+    cy.createRecommendation().then((recommendation) => {
+      cy.intercept("GET", "/recommendations/random").as(
+        "refreshRecommendations"
+      );
+
+      cy.wait("@refreshRecommendations");
+
+      cy.contains(recommendation.name).get("[data-cy='upvote']").click();
+
+      cy.get("[data-cy='score']").should(($span) => {
+        expect($span).to.contain("1");
+      });
+    });
+  });
 });

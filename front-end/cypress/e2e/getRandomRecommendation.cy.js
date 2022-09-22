@@ -1,6 +1,10 @@
 /* eslint-disable no-undef */
 
 describe("Random Recommendation", () => {
+  beforeEach(() => {
+    cy.resetDatabase();
+  });
+
   it("Should be able to navigate to random recommendation page", () => {
     cy.visit("http://localhost:3000/");
 
