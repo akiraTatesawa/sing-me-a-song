@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "dotenv -e .env.test jest -i",
+    "test": "dotenv -e .env.test jest -i --node_modules/.bin/jest",
     "build": "npx tsc && prisma generate && npx prisma migrate deploy && npx prisma db seed",
     "start": "node ./dist/src/server.js",
     "dev": "ts-node-dev --respawn --transpile-only --exit-child --ignore-watch node_modules ./src/server.ts "

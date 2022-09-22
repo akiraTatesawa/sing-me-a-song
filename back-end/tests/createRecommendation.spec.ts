@@ -3,7 +3,7 @@ import request from "supertest";
 import { Recommendation } from "@prisma/client";
 import { RecommendationFactory } from "./factories/RecommendationFactory";
 import { prisma } from "../src/database";
-import { app } from '../src/app';
+import { app } from "../src/app";
 
 describe("POST /recommendations", () => {
   beforeEach(async () => {
