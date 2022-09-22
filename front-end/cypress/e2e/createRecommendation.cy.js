@@ -3,6 +3,10 @@
 import { randGitBranch, randVerb } from "@ngneat/falso";
 
 describe("Create Recommendation", () => {
+  beforeEach(() => {
+    cy.resetDatabase();
+  });
+
   it("Should be able to create a test", () => {
     const recommendation = {
       name: randGitBranch(),

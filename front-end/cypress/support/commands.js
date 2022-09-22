@@ -24,6 +24,10 @@ Cypress.Commands.add("createRecommendation", () => {
   }).then((res) => cy.wrap(JSON.parse(res.requestBody)));
 });
 
+Cypress.Commands.add("resetDatabase", () => {
+  cy.request("DELETE", "http://localhost:4000/e2e/reset-database");
+});
+
 //
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
