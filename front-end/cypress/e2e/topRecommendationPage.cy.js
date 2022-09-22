@@ -32,4 +32,16 @@ describe("Top Recommendation Page", () => {
       cy.get("[data-cy='recommendation-name']").should("be.visible");
     });
   });
+
+  it("Should show 'No recommendations yet!' message if there is no recommendations", () => {
+    cy.intercept("GET", "/recommendations/top/10").as("getTopRecommendation");
+
+    cy.visit("http://localhost:3000/top");
+
+    cy.wait("@getTopRecommendation");
+
+    cy.get("[data-cy='no-recommendations']").should(($div) => {
+      expect($div).to.contain("No recommendations yet! Create your own :)");
+    });
+  });
 });

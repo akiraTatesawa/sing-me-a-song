@@ -24,7 +24,9 @@ export default function Home() {
       ))}
 
       {recommendations.length === 0 && (
-        <div>No recommendations yet! Create your own :)</div>
+        <div data-cy="no-recommendations">
+          No recommendations yet! Create your own :)
+        </div>
       )}
     </>
   );
