@@ -5,8 +5,16 @@ describe("Random Recommendation", () => {
     cy.resetDatabase();
   });
 
-  it("Should be able to navigate to random recommendation page", () => {
+  it("Should be able to navigate to random recommendation page from homepage", () => {
     cy.visit("http://localhost:3000/");
+
+    cy.get("[data-cy='random']").click();
+
+    cy.url().should("equal", "http://localhost:3000/random");
+  });
+
+  it("Should be able to navigate to random recommendation page from top page", () => {
+    cy.visit("http://localhost:3000/top");
 
     cy.get("[data-cy='random']").click();
 
