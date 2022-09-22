@@ -21,7 +21,7 @@ export default function Menu() {
         Top
       </MenuItem>
 
-      <MenuItem onClick={() => navigate("/random")}>
+      <MenuItem onClick={() => navigate("/random")} data-cy="random">
         <FiShuffle />
         Random
       </MenuItem>
