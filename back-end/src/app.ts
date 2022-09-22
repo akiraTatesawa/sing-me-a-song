@@ -14,7 +14,7 @@ app.use(express.json());
 
 app.use("/recommendations", recommendationRouter);
 
-if (process.env.NODE_ENV === "dev") {
+if (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "dev") {
   app.use("/e2e", e2eRouter);
 }
 
