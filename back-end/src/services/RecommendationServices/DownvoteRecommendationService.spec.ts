@@ -1,5 +1,5 @@
 import { IRecommendationRepository } from "../../repositories/IRecommendationRepository";
-import { mockRecommendationRepository } from "../../repositories/mocks/MockRecommendationRepository";
+import { MockRecommendationRepository } from "../../repositories/mocks/MockRecommendationRepository";
 import { notFoundError } from "../../utils/errorUtils";
 import { RecommendationFactory } from "../../../tests/factories/RecommendationFactory";
 import {
@@ -12,7 +12,7 @@ describe("Downvote Recommendation Service", () => {
   let downvoteRecommendationService: IDownvoteRecommendationService;
 
   beforeAll(() => {
-    recommendationRepository = mockRecommendationRepository();
+    recommendationRepository = new MockRecommendationRepository();
     downvoteRecommendationService = new DownvoteRecommendationService(
       recommendationRepository
     );

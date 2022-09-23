@@ -1,6 +1,6 @@
 import { Recommendation } from "@prisma/client";
 import { IRecommendationRepository } from "../../repositories/IRecommendationRepository";
-import { mockRecommendationRepository } from "../../repositories/mocks/MockRecommendationRepository";
+import { MockRecommendationRepository } from "../../repositories/mocks/MockRecommendationRepository";
 import { RecommendationFactory } from "../../../tests/factories/RecommendationFactory";
 import {
   IGetAllRecommendationsService,
@@ -12,7 +12,7 @@ describe("Get All Recommendations Service", () => {
   let getAllRecommendationService: IGetAllRecommendationsService;
 
   beforeAll(() => {
-    recommendationRepository = mockRecommendationRepository();
+    recommendationRepository = new MockRecommendationRepository();
     getAllRecommendationService = new GetAllRecommendationService(
       recommendationRepository
     );

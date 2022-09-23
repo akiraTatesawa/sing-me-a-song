@@ -10,7 +10,7 @@ describe("Reset Database Service", () => {
   let resetDatabaseService: IResetDatabaseService;
 
   beforeAll(() => {
-    repository = MockE2ERepository();
+    repository = new MockE2ERepository();
     resetDatabaseService = new ResetDatabaseService(repository);
   });
   it("Should be able to reset the database", async () => {

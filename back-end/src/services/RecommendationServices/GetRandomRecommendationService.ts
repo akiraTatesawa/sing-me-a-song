@@ -4,6 +4,7 @@ import { notFoundError } from "../../utils/errorUtils";
 
 export interface IGetRandomRecommendationService {
   execute(): Promise<Recommendation>;
+  setScoreFilter(): "gt" | "lte";
 }
 
 export class GetRandomRecommendationService
@@ -26,9 +27,15 @@ export class GetRandomRecommendationService
     this.repository = repository;
   }
 
-  async execute(): Promise<Recommendation> {
+  setScoreFilter() {
     const random = Math.random();
     const scoreFilter = random < 0.7 ? "gt" : "lte";
+
+    return scoreFilter;
+  }
+
+  async execute(): Promise<Recommendation> {
+    const scoreFilter = this.setScoreFilter();
 
     const recommendations = await this.getByScore(scoreFilter);
 
