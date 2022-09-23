@@ -1,5 +1,5 @@
 import { IRecommendationRepository } from "../../repositories/IRecommendationRepository";
-import { mockRecommendationRepository } from "../../repositories/mocks/MockRecommendationRepository";
+import { MockRecommendationRepository } from "../../repositories/mocks/MockRecommendationRepository";
 import { RecommendationFactory } from "../../../tests/factories/RecommendationFactory";
 import { notFoundError } from "../../utils/errorUtils";
 import {
@@ -12,7 +12,7 @@ describe("Get Random Recommendation Service", () => {
   let getRandomRecommendationService: IGetRandomRecommendationService;
 
   beforeAll(() => {
-    recommendationRepository = mockRecommendationRepository();
+    recommendationRepository = new MockRecommendationRepository();
     getRandomRecommendationService = new GetRandomRecommendationService(
       recommendationRepository
     );

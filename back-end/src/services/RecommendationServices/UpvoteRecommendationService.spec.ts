@@ -3,7 +3,7 @@ import {
   UpvoteRecommendationService,
 } from "./UpvoteRecommendationService";
 import { IRecommendationRepository } from "../../repositories/IRecommendationRepository";
-import { mockRecommendationRepository } from "../../repositories/mocks/MockRecommendationRepository";
+import { MockRecommendationRepository } from "../../repositories/mocks/MockRecommendationRepository";
 import { notFoundError } from "../../utils/errorUtils";
 import { RecommendationFactory } from "../../../tests/factories/RecommendationFactory";
 
@@ -12,7 +12,7 @@ describe("Upvote Recommendation Service", () => {
   let upvoteRecommendationService: IUpvoteRecommendationService;
 
   beforeAll(() => {
-    recommendationRepository = mockRecommendationRepository();
+    recommendationRepository = new MockRecommendationRepository();
     upvoteRecommendationService = new UpvoteRecommendationService(
       recommendationRepository
     );

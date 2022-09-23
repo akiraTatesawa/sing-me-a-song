@@ -1,5 +1,5 @@
 import { IRecommendationRepository } from "../../repositories/IRecommendationRepository";
-import { mockRecommendationRepository } from "../../repositories/mocks/MockRecommendationRepository";
+import { MockRecommendationRepository } from "../../repositories/mocks/MockRecommendationRepository";
 import { conflictError } from "../../utils/errorUtils";
 import { RecommendationFactory } from "../../../tests/factories/RecommendationFactory";
 import {
@@ -12,7 +12,7 @@ describe("Create Recommendation Service", () => {
   let createRecommendationService: ICreateRecommendationService;
 
   beforeAll(() => {
-    recommendationRepository = mockRecommendationRepository();
+    recommendationRepository = new MockRecommendationRepository();
     createRecommendationService = new CreateRecommendationService(
       recommendationRepository
     );

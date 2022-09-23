@@ -3,7 +3,7 @@ import {
   IGetTopRecommendationsService,
   GetTopRecommendationsService,
 } from "./GetTopRecommendationsService";
-import { mockRecommendationRepository } from "../../repositories/mocks/MockRecommendationRepository";
+import { MockRecommendationRepository } from "../../repositories/mocks/MockRecommendationRepository";
 import { RecommendationFactory } from "../../../tests/factories/RecommendationFactory";
 
 describe("Get Top Recommendation Service", () => {
@@ -11,7 +11,7 @@ describe("Get Top Recommendation Service", () => {
   let getTopRecommendationService: IGetTopRecommendationsService;
 
   beforeAll(() => {
-    recommendationRepository = mockRecommendationRepository();
+    recommendationRepository = new MockRecommendationRepository();
     getTopRecommendationService = new GetTopRecommendationsService(
       recommendationRepository
     );

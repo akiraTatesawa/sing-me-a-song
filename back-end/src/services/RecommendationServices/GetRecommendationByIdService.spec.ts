@@ -3,7 +3,7 @@ import {
   IGetRecommendationByIdService,
   GetRecommendationByIdService,
 } from "./GetRecommendationByIdService";
-import { mockRecommendationRepository } from "../../repositories/mocks/MockRecommendationRepository";
+import { MockRecommendationRepository } from "../../repositories/mocks/MockRecommendationRepository";
 import { RecommendationFactory } from "../../../tests/factories/RecommendationFactory";
 import { notFoundError } from "../../utils/errorUtils";
 
@@ -12,7 +12,7 @@ describe("Get Recommendation by Id Service", () => {
   let getRecommendationByIdService: IGetRecommendationByIdService;
 
   beforeAll(() => {
-    recommendationRepository = mockRecommendationRepository();
+    recommendationRepository = new MockRecommendationRepository();
     getRecommendationByIdService = new GetRecommendationByIdService(
       recommendationRepository
     );
