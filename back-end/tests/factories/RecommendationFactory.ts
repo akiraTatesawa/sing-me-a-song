@@ -48,7 +48,7 @@ export class RecommendationFactory implements IRecommendationFactory {
       id: randNumber({ min: 1, max: 1000 }),
       name: randFullName(),
       youtubeLink: `https://www.youtube.com/${randVerb()}`,
-      score: isScoreRandom ? randNumber({ min: -4, max: 10 }) : 0,
+      score: isScoreRandom ? randNumber({ min: -4, max: 20 }) : 0,
     };
 
     return recommendation;
