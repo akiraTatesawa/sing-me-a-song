@@ -45,4 +45,28 @@ describe("Create Recommendation", () => {
       });
     });
   });
+
+  it("Should not be able to create a recommendation with invalid youtube link", () => {
+    cy.visit("http://localhost:3000");
+
+    const invalidRecommendation = {
+      name: randGitBranch(),
+      youtubeLink: "http://invalid.com",
+    };
+
+    cy.get("[data-cy='name-input']").type(invalidRecommendation.name);
+    cy.get("[data-cy='youtube-link-input']").type(
+      invalidRecommendation.youtubeLink
+    );
+
+    cy.intercept("POST", "/recommendations").as("createRecommendation");
+
+    cy.get("[data-cy='submit-recommendation']").click();
+
+    cy.wait("@createRecommendation");
+
+    cy.on("window:alert", (str) => {
+      expect(str).to.equal(`Error creating recommendation!`);
+    });
+  });
 });

@@ -13,7 +13,7 @@ describe("POST /recommendations", () => {
     prisma.$disconnect();
   });
 
-  it("Should be able to create a recommendation", async () => {
+  it("Should return 201 and be able to create a recommendation", async () => {
     const recommendation =
       new RecommendationFactory().generateValidRecommendationRequest();
 
@@ -25,7 +25,7 @@ describe("POST /recommendations", () => {
     expect(result.body).toHaveProperty<Recommendation>("id");
   });
 
-  it("Should not be able to create a recommendation with invalid format", async () => {
+  it("Should return 422 and not be able to create a recommendation with invalid format", async () => {
     const invalidRecommendation =
       new RecommendationFactory().generateInvalidRecommendationRequest();
 
@@ -37,7 +37,7 @@ describe("POST /recommendations", () => {
     expect(result.body).toEqual({});
   });
 
-  it("Should not be able to create a recommendation with a non-unique name", async () => {
+  it("Should return 409 and not be able to create a recommendation with a non-unique name", async () => {
     const recommendation =
       await new RecommendationFactory().createRecommendation();
 

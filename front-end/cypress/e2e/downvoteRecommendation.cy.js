@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable no-undef */
 
 describe("Downvote Recommendation", () => {
@@ -54,6 +55,26 @@ describe("Downvote Recommendation", () => {
       cy.get("[data-cy='score']").should(($span) => {
         expect($span).to.contain("-1");
       });
+    });
+  });
+
+  it("Should be able to downvote a recommendation till deletion", () => {
+    cy.createRecommendation().then((recommendation) => {
+      cy.visit("http://localhost:3000");
+
+      cy.intercept("GET", "/recommendations").as("refreshRecommendations");
+
+      cy.wait("@refreshRecommendations");
+
+      const click = 6;
+
+      for (let i = 0; i < click; i++) {
+        cy.contains(recommendation.name).get("[data-cy='downvote']").click();
+      }
+
+      cy.wait("@refreshRecommendations");
+
+      cy.get("[data-cy='score']").should("not.exist");
     });
   });
 });
