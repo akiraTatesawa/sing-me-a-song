@@ -21,7 +21,7 @@ describe("Top Recommendation Page", () => {
     cy.url().should("equal", "http://localhost:3000/top");
   });
 
-  it("Should be able to get a random recommendation", () => {
+  it("Should be able to get the top recommendations", () => {
     cy.createRecommendation().then(() => {
       cy.visit("http://localhost:3000/top");
 
@@ -33,7 +33,7 @@ describe("Top Recommendation Page", () => {
     });
   });
 
-  it("Should show 'No recommendations yet!' message if there is no recommendations", () => {
+  it("Should show 'No recommendations yet!' message if there are no recommendations", () => {
     cy.intercept("GET", "/recommendations/top/10").as("getTopRecommendation");
 
     cy.visit("http://localhost:3000/top");
