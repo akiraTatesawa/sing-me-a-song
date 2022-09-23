@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "environmentName": "Sing Me a Song DEV env",
-    "dateExported": "2022-09-21T17:25:41.301Z",
+    "dateExported": "2022-09-23T14:08:17.595Z",
     "version": "1.0",
     "variables": [
         {
@@ -10,7 +10,7 @@
         },
         {
             "name": "recommendationId",
-            "value": ""
+            "value": "1"
         }
     ]
 }

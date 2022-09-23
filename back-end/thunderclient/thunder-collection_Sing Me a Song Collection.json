@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "Sing Me a Song Collection",
-    "dateExported": "2022-09-21T17:25:13.802Z",
+    "dateExported": "2022-09-23T14:07:07.690Z",
     "version": "1.1",
     "folders": [
         {
@@ -64,7 +64,7 @@
             "method": "POST",
             "sortNum": 30000,
             "created": "2022-09-20T23:22:15.677Z",
-            "modified": "2022-09-21T17:24:27.592Z",
+            "modified": "2022-09-22T17:27:54.508Z",
             "headers": [],
             "params": [],
             "body": {
@@ -421,6 +421,33 @@
                     "custom": "",
                     "action": "istype",
                     "value": "string"
+                }
+            ]
+        },
+        {
+            "_id": "62d81d8f-a636-4140-921e-38e7431e5244",
+            "colId": "f1983cb8-5fab-4495-bd77-dd203eee9756",
+            "containerId": "",
+            "name": "E2E RESET DATABASE",
+            "url": "{{URL}}/e2e/reset-database",
+            "method": "DELETE",
+            "sortNum": 150000,
+            "created": "2022-09-22T17:26:33.223Z",
+            "modified": "2022-09-23T14:06:44.997Z",
+            "headers": [],
+            "params": [],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "false"
                 }
             ]
         }
