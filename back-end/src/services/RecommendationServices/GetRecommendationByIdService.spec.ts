@@ -33,7 +33,7 @@ describe("Get Recommendation by Id Service", () => {
       returnedRecommendation
     );
 
-    expect(recommendationRepository.find).toHaveBeenCalled();
+    expect(recommendationRepository.find).toHaveBeenCalledWith(id);
   });
 
   it("Should not be able to get recommendation by id if does not exist", async () => {
@@ -45,6 +45,6 @@ describe("Get Recommendation by Id Service", () => {
       notFoundError("Recommendation not found")
     );
 
-    expect(recommendationRepository.find).toHaveBeenCalled();
+    expect(recommendationRepository.find).toHaveBeenCalledWith(id);
   });
 });

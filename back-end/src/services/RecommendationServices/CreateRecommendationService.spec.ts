@@ -22,14 +22,26 @@ describe("Create Recommendation Service", () => {
     const recommendation =
       new RecommendationFactory().generateValidRecommendationRequest();
 
+    const createdRecommendation = {
+      ...new RecommendationFactory().generateValidRecommendationDB(),
+      name: recommendation.name,
+      youtubeLink: recommendation.youtubeLink,
+    };
+
+    jest
+      .spyOn(recommendationRepository, "create")
+      .mockResolvedValueOnce(createdRecommendation);
+
     await expect(
       createRecommendationService.execute(recommendation)
-    ).resolves.not.toThrow();
+    ).resolves.toEqual(createdRecommendation);
 
     expect(recommendationRepository.findByName).toHaveBeenCalledWith(
       recommendation.name
     );
-    expect(recommendationRepository.create).toHaveBeenCalled();
+    expect(recommendationRepository.create).toHaveBeenCalledWith(
+      recommendation
+    );
   });
 
   it("Should not be able to create a recommendation with a non-unique name", async () => {
@@ -49,6 +61,9 @@ describe("Create Recommendation Service", () => {
       createRecommendationService.execute(recommendation)
     ).rejects.toEqual(conflictError("Recommendations names must be unique"));
 
-    expect(recommendationRepository.findByName).toHaveBeenCalled();
+    expect(recommendationRepository.findByName).toHaveBeenCalledWith(
+      recommendation.name
+    );
+    expect(recommendationRepository.create).not.toHaveBeenCalled();
   });
 });

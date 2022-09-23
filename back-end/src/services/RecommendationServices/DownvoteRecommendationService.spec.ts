@@ -34,8 +34,13 @@ describe("Downvote Recommendation Service", () => {
       downvoteRecommendationService.execute(existingRecommendation.id)
     ).resolves.not.toThrow();
 
-    expect(recommendationRepository.find).toHaveBeenCalled();
-    expect(recommendationRepository.updateScore).toHaveBeenCalled();
+    expect(recommendationRepository.find).toHaveBeenCalledWith(
+      existingRecommendation.id
+    );
+    expect(recommendationRepository.updateScore).toHaveBeenCalledWith(
+      existingRecommendation.id,
+      "decrement"
+    );
     expect(recommendationRepository.remove).not.toHaveBeenCalled();
   });
 
@@ -57,9 +62,16 @@ describe("Downvote Recommendation Service", () => {
       downvoteRecommendationService.execute(existingRecommendation.id)
     ).resolves.not.toThrow();
 
-    expect(recommendationRepository.find).toHaveBeenCalled();
-    expect(recommendationRepository.updateScore).toHaveBeenCalled();
-    expect(recommendationRepository.remove).toHaveBeenCalled();
+    expect(recommendationRepository.find).toHaveBeenCalledWith(
+      existingRecommendation.id
+    );
+    expect(recommendationRepository.updateScore).toHaveBeenCalledWith(
+      existingRecommendation.id,
+      "decrement"
+    );
+    expect(recommendationRepository.remove).toHaveBeenCalledWith(
+      existingRecommendation.id
+    );
   });
 
   it("Should not be able to Downvote a recommendation if does not exist", async () => {
@@ -71,7 +83,7 @@ describe("Downvote Recommendation Service", () => {
       notFoundError("Recommendation not found")
     );
 
-    expect(recommendationRepository.find).toHaveBeenCalled();
+    expect(recommendationRepository.find).toHaveBeenCalledWith(id);
     expect(recommendationRepository.updateScore).not.toHaveBeenCalled();
     expect(recommendationRepository.remove).not.toHaveBeenCalled();
   });

@@ -30,8 +30,13 @@ describe("Upvote Recommendation Service", () => {
       upvoteRecommendationService.execute(existingRecommendation.id)
     ).resolves.not.toThrow();
 
-    expect(recommendationRepository.find).toHaveBeenCalled();
-    expect(recommendationRepository.updateScore).toHaveBeenCalled();
+    expect(recommendationRepository.find).toHaveBeenCalledWith(
+      existingRecommendation.id
+    );
+    expect(recommendationRepository.updateScore).toHaveBeenCalledWith(
+      existingRecommendation.id,
+      "increment"
+    );
   });
 
   it("Should not be able to Upvote a recommendation if does not exist", async () => {
@@ -43,7 +48,7 @@ describe("Upvote Recommendation Service", () => {
       notFoundError("Recommendation not found")
     );
 
-    expect(recommendationRepository.find).toHaveBeenCalled();
+    expect(recommendationRepository.find).toHaveBeenCalledWith(id);
     expect(recommendationRepository.updateScore).not.toHaveBeenCalled();
   });
 });

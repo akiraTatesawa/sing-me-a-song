@@ -21,6 +21,16 @@ describe("POST /recommendation/:id/downvote", () => {
     expect(result.body).toEqual({});
   });
 
+  it("Should be able to downvote a recommendation and delete it", async () => {
+    const { id } = await new RecommendationFactory().createRecommendation();
+    await new RecommendationFactory().changeRecommendationScore(id, -4);
+
+    const result = await request(app).post(`/recommendations/${id}/downvote`);
+
+    expect(result.status).toEqual(200);
+    expect(result.body).toEqual({});
+  });
+
   it("Should not be able to downvote a recommendation if does not exist", async () => {
     const result = await request(app).post(
       `/recommendations/${Math.floor(Math.random() * 100) + 1}/downvote`
